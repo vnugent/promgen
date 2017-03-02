@@ -1,0 +1,2 @@
+# promgen
+Prometheus metric generator
