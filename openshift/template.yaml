@@ -2,9 +2,9 @@
 kind: Template
 apiVersion: v1
 metadata:
-  name: prom-gen
+  name: promgen
   annotations:
-    openshift.io/display-name: prom-gen
+    openshift.io/display-name: promgen
     description: Prometheus metrics generator
     tags: quickstart,nodejs,hawkular,prometheus
     iconClass: icon-nodejs
@@ -14,10 +14,8 @@ metadata:
     template.openshift.io/support-url: https://github.com/vnugent/promgen.git
 message: |-
   The following service(s) have been created in your project: ${NAME}.
-
-  For more information about using this template, including OpenShift considerations, see https://github.com/openshift/nodejs-ex/blob/master/README.md.
 labels:
-  template: nodejs-example
+  template: promgen
 objects:
 - kind: Service
   apiVersion: v1
@@ -65,15 +63,14 @@ objects:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          namespace: "${NAMESPACE}"
-          name: nodejs:4
+          name: nodejs:v1.4.1
         env:
         - name: NPM_MIRROR
           value: "${NPM_MIRROR}"
     output:
       to:
         kind: ImageStreamTag
-        name: "${NAME}:latest"
+        name: "promgen:latest"
     triggers:
     - type: ImageChange
     - type: ConfigChange
@@ -99,7 +96,7 @@ objects:
       imageChangeParams:
         automatic: true
         containerNames:
-        - nodejs-example
+        - promgen
         from:
           kind: ImageStreamTag
           name: "${NAME}:latest"
@@ -114,8 +111,8 @@ objects:
           name: "${NAME}"
       spec:
         containers:
-        - name: nodejs-example
-          image: " "
+        - name: promgen
+          image: promgen:latest
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -139,12 +136,7 @@ parameters:
   displayName: Name
   description: The name assigned to all of the frontend objects defined in this template.
   required: true
-  value: nodejs-example
-- name: NAMESPACE
-  displayName: Namespace
-  description: The OpenShift Namespace where the ImageStream resides.
-  required: true
-  value: openshift
+  value: promgen
 - name: MEMORY_LIMIT
   displayName: Memory Limit
   description: Maximum amount of memory the container can use.
