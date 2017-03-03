@@ -14,4 +14,4 @@ server.get('/metrics', function(req, res) {
 	res.end(register.metrics());
 });
 
-server.listen(3000);
+server.listen(8080);
