@@ -1,10 +1,10 @@
 {
   "name" : "promgen",
-  "description" : "Prometheus metric generator",
+  "description" : "Prometheus Metrics generator",
   "author" : "Viet Nguyen <vnguyen@redhat.com>",
   "contributors" : [],
-  "dependencies" : ["express", "prom-client"],
+  "dependencies" : ["express", "prom-client", "path"],
   "repository" : {"type": "git", "url": "https://github.com/vnugent/promgen.git"},
   "main" : "server.js",
-  "version" : "1.1.6"
+  "version" : "0.0.1"
 }
