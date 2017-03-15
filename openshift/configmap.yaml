@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: promgen
+  labels:
+    name: promgen
+    type: nodejs
+data:
+  hawkular-openshift-agent: |
+    endpoints:
+    - type: prometheus
+      protocol: "http"
+      port: 8080
+      path: /metrics
+      collection_interval: "30s"

@@ -6,6 +6,9 @@ var server = express();
 
 var register = require('prom-client').register;
 var client = require('prom-client');
+# disable default node.js metrics
+clearInterval(client.defaultMetrics());
+client.register.clear();
 
 var counter = new client.Counter('counterA', 'counterA help message');
 
