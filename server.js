@@ -8,15 +8,15 @@ var register = require('prom-client').register;
 var client = require('prom-client');
 
 // uncomment the following 2 lines to disable default node.js metrics
- clearInterval(client.defaultMetrics());
- client.register.clear();
+clearInterval(client.collectDefaultMetrics());
+client.register.clear();
 
 var counters = []
 var gauges = []
 
 for (var i=0; i<15; i++) {
-    counters.push(new client.Counter('counter' + i , 'Help message for counter' + i));
-    gauges.push(new client.Gauge('gauge' + i, 'Help message for gauge' +i));
+    counters.push(new client.Counter({name: 'counter' + i , help: 'Help message for counter' + i}));
+    gauges.push(new client.Gauge({name: 'gauge' + i,  help: 'Help message for gauge' +i}));
 }
 
 
